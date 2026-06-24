@@ -2,6 +2,7 @@
 
 **CO**llision **S**napshot guided **T**im**E**-**R**eversed safety-critical scenario generation (**COSTER**)
 
+Weights and additional assets will be released after acceptance.
 
 ## Setup
 
