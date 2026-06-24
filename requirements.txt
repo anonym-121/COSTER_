@@ -1,0 +1,10 @@
+torch>=2.0
+numpy
+matplotlib
+shapely
+scipy
+Pillow
+tensorboard
+pytorch-lightning
+scenarionet
+metadrive
