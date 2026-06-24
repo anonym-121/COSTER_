@@ -12,6 +12,31 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## Prepare Waymo Data
+
+Waymo Open Motion Dataset v1.1.0 is used. Download the Waymo Open Motion Dataset (WOMD) in **Scenario proto TFRecord**
+format.
+
+```bash
+python -m scenarionet.convert_waymo \
+    -d data/scenarionet/training \
+    --raw_data_path data/waymo_motion/training_20s \
+    --num_workers 32
+
+python -m scenarionet.convert_waymo \
+    -d data/scenarionet/validation \
+    --raw_data_path data/waymo_motion/validation \
+    --num_workers 32
+```
+
+Build StateEstim training PKLs from the ScenarioNet training database:
+
+```bash
+python -m state_estim.preprocess \
+    --data_dirs data/scenarionet/training \
+    --out_dir data/state_estim_train
+```
+
 ## Train StateEstim
 
 Preprocess ScenarioNet data into StateEstim-style PKLs:
@@ -39,10 +64,6 @@ Bernoulli placement probabilities and categorical distributions for position,
 velocity, heading, and size.
 
 ## Train CVAE
-
-CVAE preprocessing is performed online by `cvae/data.py`. It reads ScenarioNet
-directly and builds the CVAE tensors for target state, neighboring agents, and
-27D vector-map features inside this repository.
 
 Train the reverse-time trajectory CVAE:
 
